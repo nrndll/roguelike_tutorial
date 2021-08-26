@@ -20,7 +20,7 @@ def main() -> None:
     player = Entity(int(screen_width / 2), int(screen_height / 2), "@", (255, 255, 255))
     npc = Entity(int(screen_width / 2 - 5), int(screen_height / 2), "@", (255, 255, 0))
     
-    # set to store entities
+    # set to store entities, set enforces uniqueness. cant add entity more than once to set.
     entities = {npc, player}
 
     with tcod.context.new_terminal(

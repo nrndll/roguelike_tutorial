@@ -1,9 +1,7 @@
 # this will be a generic class to handle all entities in game, i.e. player, enemies, items etc.
 
-from typing import Tuple
-
 class Entity:
-    # tutorial defines parameters types e.g. x:int. Unneccessary?
+    # tutorial defines parameters types e.g. x:int, y:int, char:str, color:Tuple[int,int,int]
     def __init__(self, x, y, char, color):
         self.x = x
         self.y = y
