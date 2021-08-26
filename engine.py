@@ -9,7 +9,7 @@ class Engine:
         self.player = player
 
         def handle_events(self, events) -> None:
-            # loop through all events, for each one carry out dispatch and perform action
+            # iterate through events, for each one carry out dispatch method
             for event in events:
                 action = self.event_handler.dispatch(event)
 
