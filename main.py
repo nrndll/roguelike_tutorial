@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from entity import Entity
+from engine import Engine
 import tcod
-from actions import EscapeAction, MovementAction
 from input_handlers import EventHandler
 
 def main() -> None:
@@ -13,7 +13,8 @@ def main() -> None:
     tileset = tcod.tileset.load_tilesheet(
         "dejavu10x10_gs_tc.png", 32, 8, tcod.tileset.CHARMAP_TCOD
         )
-
+    
+    # create instance of EventHandler class
     event_handler = EventHandler()
 
     # create instances of Entity called player and npc
@@ -22,6 +23,9 @@ def main() -> None:
     
     # set to store entities, set enforces uniqueness. cant add entity more than once to set.
     entities = {npc, player}
+
+    # create instance of Engine class
+    engine = Engine(entities, event_handler, player)
 
     with tcod.context.new_terminal(
         screen_width,
@@ -34,22 +38,12 @@ def main() -> None:
         root_console = tcod.Console(screen_width, screen_height, order="F")
         
         while True:
-            # print player in terminal, uses player properites to get position etc.
-            root_console.print(x=player.x, y=player.y, string=player.char, fg=player.color)
-            context.present(root_console)
-            root_console.clear()
-
-            for event in tcod.event.wait():
-                action = event_handler.dispatch(event)
-                
-                if action is None:
-                    continue
-
-                if isinstance(action, MovementAction):
-                    player.move(dx=action.dx, dy=action.dy)
-
-                elif isinstance(action, EscapeAction):
-                    raise SystemExit()
+            # engine object takes root_console to render entities
+            engine.render(root_console, context)
+            # events stored in this variable, passed to engine object which will deal with them
+            events = tcod.event.wait()
+            engine.handle_events(events)
+        
 
 if __name__ == "__main__":
     main()

@@ -8,7 +8,7 @@ class Entity:
         self.char = char
         self.color = color
 
-        # increments x and y axis positions to move entity
-        def move(self, dx, dy) -> None:
-            self.x += dx
-            self.y += dy
+    # increments x and y axis positions to move entity
+    def move(self, dx, dy) -> None:
+        self.x += dx
+        self.y += dy
