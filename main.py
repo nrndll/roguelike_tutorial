@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
+import tcod
 from entity import Entity
 from engine import Engine
-import tcod
 from input_handlers import EventHandler
+from game_map import GameMap
 
 def main() -> None:
     # setting size of terminal window to render in
     screen_width = 80
     screen_height = 50
+
+    # parameters of game map
+    map_width = 80
+    map_height = 45
 
     # importing tileset
     tileset = tcod.tileset.load_tilesheet(
@@ -24,8 +29,11 @@ def main() -> None:
     # set to store entities, set enforces uniqueness. cant add entity more than once to set.
     entities = {npc, player}
 
+    # create instance of GameMap class
+    game_map = GameMap(map_width, map_height)
+
     # create instance of Engine class
-    engine = Engine(entities, event_handler, player)
+    engine = Engine(entities, event_handler, game_map, player)
 
     with tcod.context.new_terminal(
         screen_width,
