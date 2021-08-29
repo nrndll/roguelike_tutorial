@@ -27,7 +27,7 @@ def new_tile(*, walkable, transparent, dark) -> np.ndarray:
 floor = new_tile(
     walkable=True,
     transparent=True,
-    dark=(ord("#"), (255, 255, 255), (50, 50, 100))
+    dark=(ord(" "), (255, 255, 255), (50, 50, 100))
 )
 
 wall = new_tile(

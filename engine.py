@@ -1,4 +1,4 @@
-from actions import EscapeAction, MovementAction
+from action import EscapeAction, MovementAction
 from input_handlers import EventHandler
 from entity import Entity
 from tcod.context import Context
@@ -21,15 +21,7 @@ class Engine:
             if action is None:
                 continue
 
-            # if action is of the type MovementAction then move player entity via x and y
-            elif isinstance(action, MovementAction):
-                # if the tile the player is moving to has walkable attribute then move player
-                if self.game_map.tiles["walkable"][self.player.x + action.dx, self.player.y + action.dy]:
-                    self.player.move(dx=action.dx, dy=action.dy)
-
-            # if action is EscapeAction then close program
-            elif isinstance(action, EscapeAction):
-                raise SystemExit()
+            action.perform(self, self.player)
 
     # render all entites in console window
     def render(self, console, context) -> None:
