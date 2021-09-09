@@ -3,7 +3,7 @@ import tcod
 from entity import Entity
 from engine import Engine
 from input_handlers import EventHandler
-from game_map import GameMap
+from procgen import generate_dungeon
 
 def main() -> None:
     # setting size of terminal window to render in
@@ -29,8 +29,8 @@ def main() -> None:
     # set to store entities, set enforces uniqueness. cant add entity more than once to set.
     entities = {npc, player}
 
-    # create instance of GameMap class
-    game_map = GameMap(map_width, map_height)
+    # call generate_dungeon from procgen class to create a map with given parameters
+    game_map = generate_dungeon(map_width, map_height)
 
     # create instance of Engine class
     engine = Engine(entities, event_handler, game_map, player)
